@@ -11,14 +11,17 @@ public class RecursiveLister {
         listerGUI = new RecursiveListerGUI(this);
     }
     public File chooseDirectory() {
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        File userDir = new File(System.getProperty("user.dir"));
-        fileChooser.setCurrentDirectory(userDir);
-        if (fileChooser.showOpenDialog(listerGUI) == JFileChooser.APPROVE_OPTION) {
-            inputFile = fileChooser.getSelectedFile();
-        }
-        else {
-            System.out.println("No file selected");
+        try {
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            File userDir = new File(System.getProperty("user.dir"));
+            fileChooser.setCurrentDirectory(userDir);
+            if (fileChooser.showOpenDialog(listerGUI) == JFileChooser.APPROVE_OPTION) {
+                inputFile = fileChooser.getSelectedFile();
+            } else {
+                System.out.println("No file selected");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return inputFile;
     }
