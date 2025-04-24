@@ -23,15 +23,19 @@ public class RecursiveLister {
         return inputFile;
     }
     public void listFiles(File directory) {
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                System.out.println(file.getAbsolutePath());
-                listerGUI.updateDisplay(file.getAbsolutePath());
-                if (file.isDirectory()) {
-                    listFiles(file);
+        try {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    System.out.println(file.getAbsolutePath());
+                    listerGUI.updateDisplay(file.getAbsolutePath());
+                    if (file.isDirectory()) {
+                        listFiles(file);
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
